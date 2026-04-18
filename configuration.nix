@@ -17,21 +17,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "wren";
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/Detroit";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -44,23 +34,51 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  ###########################################################################
+  # Desktop environments / compositors
 
-  # Enable the GNOME Desktop Environment.
+  # GNOME (existing)
+  services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Hyprland — also pulls in xdg-desktop-portal-hyprland automatically
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;  # use uwsm session wrapper (replaces manual uwsm setup)
+  };
 
-  # Enable sound with pipewire.
+  # Niri — scrollable-tiling Wayland compositor
+  programs.niri.enable = true;
+
+  # Sway — i3-compatible tiling Wayland compositor
+  # Also pulls in xdg-desktop-portal-wlr automatically
+  programs.sway.enable = true;
+
+  # Miracle-WM — Mir-based tiling compositor
+  # No NixOS module yet; added as a package below.
+
+  ###########################################################################
+  # XDG Desktop Portals
+  ###########################################################################
+
+  xdg.portal = {
+    enable = true;
+    # xdg-desktop-portal-gnome  — auto-added by services.xserver.desktopManager.gnome
+    # xdg-desktop-portal-hyprland — auto-added by programs.hyprland
+    # xdg-desktop-portal-wlr    — auto-added by programs.sway
+    # Add gtk portal as fallback for niri and other compositors
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  };
+
+  ###########################################################################
+  # Audio
+  ###########################################################################
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -68,65 +86,146 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  ###########################################################################
+  # Printing
+  ###########################################################################
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.aron = {
-    isNormalUser = true;
-    description = "Aron Griffis";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+  services.printing.enable = true;
+
+  ###########################################################################
+  # Networking / VPN
+  ###########################################################################
+
+  # Tailscale (replaces build/20-tailscale.sh)
+  services.tailscale.enable = true;
+
+  ###########################################################################
+  # Virtualisation
+  ###########################################################################
+
+  # Podman with Docker socket compatibility (replaces `systemctl enable podman.socket`)
+  virtualisation.podman = {
+    enable = true;
+    dockerSocket.enable = true;
+    defaultNetwork.settings.dns_enabled = true;
   };
+
+  # Libvirt / KVM (replaces `dnf5 install libvirt virt-install`)
+  virtualisation.libvirtd.enable = true;
+
+  ###########################################################################
+  # Syncthing
+  ###########################################################################
+
+  services.syncthing = {
+    enable = true;
+    user = "aron";
+    dataDir = "/home/aron";
+    configDir = "/home/aron/.config/syncthing";
+    openDefaultPorts = true;
+  };
+
+  ###########################################################################
+  # Keybase / KBFS (replaces build/21-keybase.sh)
+  ###########################################################################
+
+  services.keybase.enable = true;
+  services.kbfs.enable = true;
+  # Note: the keybase-redirector bug worked around in the Fedora script is
+  # not applicable here; NixOS ships a clean keybase package.
+
+  ###########################################################################
+  # Programs
+  ###########################################################################
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    # The Bluefin build pulled neovim from the agriffis/neovim-nightly COPR.
+    # For nightly on NixOS, add the neovim-nightly-overlay flake input and
+    # override pkgs.neovim — see the comment in flake.nix.
   };
 
-  # Install firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  ###########################################################################
+  # System packages
+  ###########################################################################
+
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+
+    # ── Terminals ──────────────────────────────────────────────────────────
+    kitty
+    ghostty
+
+    # ── GNOME extras ───────────────────────────────────────────────────────
+    gnome-pomodoro
+
+    # ── CLI / shell tools (build/10-build.sh) ──────────────────────────────
+    eternal-terminal  # 'et' remote shell
+    mise              # runtime version manager (asdf replacement)
+    stow              # symlink farm manager
+    tree-sitter       # parser library + CLI
+
+    # ── ncurses utilities ──────────────────────────────────────────────────
+    ncurses           # includes 'toe' (table of terminfo entries)
+
+    # ── Virtualisation tools ───────────────────────────────────────────────
+    virt-manager
+    virt-viewer
+
+    # ── Hyprland ecosystem (build/10-build.sh) ─────────────────────────────
+    # hyprland itself is managed by programs.hyprland.enable above
+    hyprpolkitagent            # polkit agent for Hyprland
+    hyprpicker                 # colour picker
+    hypridle                   # idle daemon
+    hyprlock                   # screen locker
+    hyprsunset                 # blue-light filter
+    hyprsysteminfo             # system info overlay
+    hyprshot                   # screenshot tool
+    uwsm                       # universal Wayland session manager
+    # hyprland-contrib and hyprland-plugins are not in nixpkgs as a bundle;
+    # use the upstream hyprland flake overlay if you need them.
+
+    # ── Wayland / compositor helpers (build/40-desktops.sh) ───────────────
+    brightnessctl              # backlight control
+    kanshi                     # dynamic display config (autorandr for Wayland)
+    playerctl                  # MPRIS media player control
+    wayland-utils              # wayland-info etc.
+    wev                        # Wayland event viewer
+    wl-clipboard               # wl-copy / wl-paste
+    wlr-randr                  # xrandr equivalent for wlroots
+    xwayland-satellite         # rootless Xwayland for niri/sway
+
+    # Miracle-WM (no NixOS module yet)
+    miracle-wm
+
+    # ── NOT available in nixpkgs (Fyra Labs / Terra only) ─────────────────
+    # noctalia-shell  — Fyra Labs shell layer for niri; no nixpkgs package.
+    #                   Options: build from source, or use a custom overlay.
+    # mangowc         — MangoWM compositor; no nixpkgs package yet.
+
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  ###########################################################################
+  # Users
+  ###########################################################################
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  users.users.aron = {
+    isNormalUser = true;
+    description = "Aron Griffis";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"   # KVM / virt-manager access
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -135,5 +234,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
