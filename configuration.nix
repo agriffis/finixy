@@ -34,6 +34,10 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
+  services.flatpak.enable = true;
+
   ###########################################################################
   # Desktop environments / compositors
 
@@ -169,6 +173,7 @@
 
     # ── CLI / shell tools (build/10-build.sh) ──────────────────────────────
     eternal-terminal  # 'et' remote shell
+    git
     mise              # runtime version manager (asdf replacement)
     stow              # symlink farm manager
     tree-sitter       # parser library + CLI
