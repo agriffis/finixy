@@ -125,6 +125,9 @@
 
   virtualisation.docker = {
     enable = true;
+    daemon.settings = {
+      features.containerd-snapshotter = true;
+    };
   };
 
   # Libvirt / KVM (replaces `dnf5 install libvirt virt-install`)
