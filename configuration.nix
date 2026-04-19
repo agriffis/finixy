@@ -117,10 +117,14 @@
   ###########################################################################
 
   # Podman with Docker socket compatibility (replaces `systemctl enable podman.socket`)
-  virtualisation.podman = {
+  #virtualisation.podman = {
+  #  enable = true;
+  #  dockerSocket.enable = true;
+  #  defaultNetwork.settings.dns_enabled = true;
+  #};
+
+  virtualisation.docker = {
     enable = true;
-    dockerSocket.enable = true;
-    defaultNetwork.settings.dns_enabled = true;
   };
 
   # Libvirt / KVM (replaces `dnf5 install libvirt virt-install`)
