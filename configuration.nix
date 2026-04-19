@@ -256,6 +256,7 @@
       "networkmanager"
       "wheel"
       "libvirtd"   # KVM / virt-manager access
+      "docker"
     ];
   };
 
