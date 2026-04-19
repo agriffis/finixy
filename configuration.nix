@@ -38,17 +38,24 @@
 
   services.flatpak.enable = true;
 
+  # Enable the Smart Card daemon (required for YubiKey)
+  services.pcscd.enable = true;
+
+  # Add Yubico udev rules (gives your user permission to access the key)
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+
   ###########################################################################
   # Desktop environments / compositors
 
-  # GNOME (existing)
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  #services.xserver.enable = true;
+  #services.xserver.xkb = {
+  #  layout = "us";
+  #  variant = "";
+  #};
+
+  # GNOME
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Hyprland — also pulls in xdg-desktop-portal-hyprland automatically
   programs.hyprland = {
@@ -172,6 +179,7 @@
     gnome-pomodoro
 
     # ── CLI / shell tools (build/10-build.sh) ──────────────────────────────
+    atuin
     eternal-terminal  # 'et' remote shell
     git
     mise              # runtime version manager (asdf replacement)
@@ -215,6 +223,11 @@
     # noctalia-shell  — Fyra Labs shell layer for niri; no nixpkgs package.
     #                   Options: build from source, or use a custom overlay.
     # mangowc         — MangoWM compositor; no nixpkgs package yet.
+
+    keybase-gui
+    signal-desktop
+    yubikey-manager
+    yubioath-flutter
 
   ];
 
