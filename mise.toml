@@ -1,0 +1,2 @@
+[tasks.switch]
+run = 'sudo nixos-rebuild switch --flake .'
