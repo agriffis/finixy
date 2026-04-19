@@ -143,7 +143,10 @@
   ###########################################################################
 
   services.keybase.enable = true;
-  services.kbfs.enable = true;
+  services.kbfs = {
+    enable = true;
+    mountPoint = "%h/keybase";
+  };
   # Note: the keybase-redirector bug worked around in the Fedora script is
   # not applicable here; NixOS ships a clean keybase package.
 
@@ -230,6 +233,10 @@
     yubioath-flutter
 
   ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   ###########################################################################
   # Users
