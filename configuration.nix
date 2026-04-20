@@ -50,6 +50,7 @@
     nerd-fonts.iosevka
     nerd-fonts.recursive-mono
     nerd-fonts.victor-mono
+    recursive
   ];
 
   ###########################################################################
