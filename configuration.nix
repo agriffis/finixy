@@ -45,6 +45,7 @@
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
   fonts.packages = with pkgs; [
+    iosevka-bin
     nerd-fonts.inconsolata-go
     nerd-fonts.iosevka
     nerd-fonts.victor-mono
