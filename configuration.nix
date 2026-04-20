@@ -44,6 +44,12 @@
   # Add Yubico udev rules (gives your user permission to access the key)
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.inconsolata-go
+    nerd-fonts.iosevka
+    nerd-fonts.victor-mono
+  ];
+
   ###########################################################################
   # Desktop environments / compositors
 
