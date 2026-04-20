@@ -48,6 +48,7 @@
     iosevka-bin
     nerd-fonts.inconsolata-go
     nerd-fonts.iosevka
+    nerd-fonts.recursive-mono
     nerd-fonts.victor-mono
   ];
 
