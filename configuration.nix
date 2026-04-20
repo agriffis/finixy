@@ -195,6 +195,8 @@
 
     # ── GNOME extras ───────────────────────────────────────────────────────
     gnome-pomodoro
+    gnome-tweaks
+    refine
 
     # ── CLI / shell tools (build/10-build.sh) ──────────────────────────────
     atuin
