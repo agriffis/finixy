@@ -53,8 +53,8 @@
         # "magic" line for driverless printing.
         model = "everywhere";
       }
-    ]
-  }
+    ];
+  };
 
   fonts.packages = with pkgs; [
     iosevka-bin
