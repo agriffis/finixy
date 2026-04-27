@@ -44,6 +44,18 @@
   # Add Yubico udev rules (gives your user permission to access the key)
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
+  services.printing.enable = true;
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "lj1200";
+        deviceUri = "ipp://junco.tail71bb0.ts.net:631/printers/lj1200";
+        # "magic" line for driverless printing.
+        model = "everywhere";
+      }
+    ]
+  }
+
   fonts.packages = with pkgs; [
     iosevka-bin
     nerd-fonts.inconsolata-go
