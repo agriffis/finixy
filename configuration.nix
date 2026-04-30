@@ -261,6 +261,8 @@
     yubikey-manager
     yubioath-flutter
 
+    zed-editor
+
   ];
 
   environment.sessionVariables = {
