@@ -53,6 +53,8 @@
     recursive
   ];
 
+  programs.mtr.enable = true;
+
   ###########################################################################
   # Desktop environments / compositors
 
