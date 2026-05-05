@@ -81,6 +81,8 @@
   # Also pulls in xdg-desktop-portal-wlr automatically
   programs.sway.enable = true;
 
+  programs.mango.enable = true;
+
   # Miracle-WM — Mir-based tiling compositor
   # No NixOS module yet; added as a package below.
 
