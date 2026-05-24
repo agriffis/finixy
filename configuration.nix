@@ -81,6 +81,9 @@
   # Also pulls in xdg-desktop-portal-wlr automatically
   programs.sway.enable = true;
 
+  # CwC — wlroots-based compositor from the upstream flake module
+  programs.cwc.enable = true;
+
   programs.mango.enable = true;
 
   # Miracle-WM — Mir-based tiling compositor
@@ -245,7 +248,10 @@
     # ── Wayland / compositor helpers (build/40-desktops.sh) ───────────────
     brightnessctl              # backlight control
     kanshi                     # dynamic display config (autorandr for Wayland)
+    grim                       # screenshot utility for wlroots compositors
     playerctl                  # MPRIS media player control
+    slurp                      # region selector for grim and other tools
+    swaybg                     # wallpaper utility for wlroots compositors
     wayland-utils              # wayland-info etc.
     wev                        # Wayland event viewer
     wl-clipboard               # wl-copy / wl-paste
