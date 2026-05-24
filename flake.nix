@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    cwc = {
+      url = "github:Cudiph/cwcwm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mangowm = {
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +25,7 @@
       modules = [
         ./configuration.nix
         nixos-hardware.nixosModules.framework-13-7040-amd
+        inputs.cwc.nixosModules.cwc
         inputs.mangowm.nixosModules.mango
         ./noctalia.nix
       ];
