@@ -182,6 +182,8 @@
     enable = true;
     mountPoint = "%h/keybase";
   };
+  systemd.user.services.keybase.unitConfig.ConditionUser = "aron";
+  systemd.user.services.kbfs.unitConfig.ConditionUser = "aron";
   # Note: the keybase-redirector bug worked around in the Fedora script is
   # not applicable here; NixOS ships a clean keybase package.
 
