@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -176,15 +176,17 @@
   # Keybase / KBFS (replaces build/21-keybase.sh)
   ###########################################################################
 
+  # TODO: switch to home manager for keybase and probably other stuff.
   services.keybase.enable = true;
   services.kbfs = {
     enable = true;
     mountPoint = "%h/keybase";
   };
-  systemd.user.services.keybase.unitConfig.ConditionUser = "aron";
-  systemd.user.services.kbfs.unitConfig.ConditionUser = "aron";
+  systemd.user.services.keybase.unitConfig.ConditionUser = lib.mkForce "aron";
+  systemd.user.services.kbfs.unitConfig.ConditionUser = lib.mkForce "aron";
   # Note: the keybase-redirector bug worked around in the Fedora script is
   # not applicable here; NixOS ships a clean keybase package.
+
 
   ###########################################################################
   # Programs
