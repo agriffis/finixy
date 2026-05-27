@@ -175,11 +175,11 @@
   # Keybase / KBFS (replaces build/21-keybase.sh)
   ###########################################################################
 
-  services.keybase.enable = true;
-  services.kbfs = {
-    enable = true;
-    mountPoint = "%h/keybase";
-  };
+ #services.keybase.enable = true;
+ #services.kbfs = {
+ #  enable = true;
+ #  mountPoint = "%h/keybase";
+ #};
   # Note: the keybase-redirector bug worked around in the Fedora script is
   # not applicable here; NixOS ships a clean keybase package.
 
@@ -263,7 +263,7 @@
     #                   Options: build from source, or use a custom overlay.
     # mangowc         — MangoWM compositor; no nixpkgs package yet.
 
-    keybase-gui
+   # keybase-gui
     signal-desktop
     yubikey-manager
     yubioath-flutter
