@@ -1,47 +1,8 @@
 {
   "nodes": {
-    "cwc": {
-      "inputs": {
-        "flake-parts": "flake-parts",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778768444,
-        "narHash": "sha256-wLLSRPBwTb+fJ/hQdmvCI23JCgarmZIc7cKR7rLZwzo=",
-        "owner": "Cudiph",
-        "repo": "cwcwm",
-        "rev": "d946fa053ac58dacc27ab28165117ba14b9aa1c9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Cudiph",
-        "repo": "cwcwm",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1765835352,
-        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_2": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
         "lastModified": 1749398372,
@@ -59,18 +20,18 @@
     },
     "mangowm": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts",
         "nixpkgs": [
           "nixpkgs"
         ],
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1779805498,
-        "narHash": "sha256-5SvhedpRneVGPLF3hyoz4aRPXwj5F0QGGd7ybjALefE=",
+        "lastModified": 1779855484,
+        "narHash": "sha256-1EFZWodhHFnoFBCm6KCwe0k8RwBSiycZRIPDJuFHqB4=",
         "owner": "mangowm",
         "repo": "mango",
-        "rev": "094a2eac22c0183f8201716d97f850efa7b8af9a",
+        "rev": "473550c62229ed7bbe9ce7c27fe5cbae79b654bb",
         "type": "github"
       },
       "original": {
@@ -81,11 +42,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1779258371,
-        "narHash": "sha256-j1iZsLy6oFApqR1oiDmHhvkwxXqcNi0aoSJj643LuwU=",
+        "lastModified": 1779826373,
+        "narHash": "sha256-3sRzgLX86qV5NlhWUAufLmHwkyP03tmL3VdZIM13dEo=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "c97bc4d15bd3473dd095e8e8ba57330ab1943a77",
+        "rev": "ef4efb84766a166c906bd55759574676bf91267c",
         "type": "github"
       },
       "original": {
@@ -112,21 +73,6 @@
       }
     },
     "nixpkgs-lib": {
-      "locked": {
-        "lastModified": 1765674936,
-        "narHash": "sha256-k00uTP4JNfmejrCLJOwdObYC9jHRrr/5M/a/8L2EIdo=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "2075416fcb47225d9b68ac469a5c4801a9c4dd85",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib_2": {
       "locked": {
         "lastModified": 1748740939,
         "narHash": "sha256-rQaysilft1aVMwF14xIdGS3sj1yHlI6oKQNBRTF40cc=",
@@ -187,7 +133,6 @@
     },
     "root": {
       "inputs": {
-        "cwc": "cwc",
         "mangowm": "mangowm",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
