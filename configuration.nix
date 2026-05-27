@@ -177,7 +177,7 @@
 
   services.keybase.enable = true;
   services.kbfs = {
-    enable = false;
+    enable = true;
     mountPoint = "%h/keybase";
   };
   # Note: the keybase-redirector bug worked around in the Fedora script is
