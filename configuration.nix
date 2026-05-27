@@ -67,7 +67,9 @@
   #};
 
   # GNOME
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = false; # last working was 2026-05-15
+  services.displayManager.lightdm.enable = true; # switched to work around gdm
+  services.displayManager.lightdm.greeters.slick.enable = true;
   services.desktopManager.gnome.enable = true;
 
   # Hyprland — also pulls in xdg-desktop-portal-hyprland automatically
