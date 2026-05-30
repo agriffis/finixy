@@ -267,6 +267,7 @@
     # mangowc         — MangoWM compositor; no nixpkgs package yet.
 
     keybase-gui
+    ladybird
     signal-desktop
     yubikey-manager
     yubioath-flutter
