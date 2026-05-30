@@ -199,6 +199,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.ladybird.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -267,7 +268,6 @@
     # mangowc         — MangoWM compositor; no nixpkgs package yet.
 
     keybase-gui
-    ladybird
     signal-desktop
     yubikey-manager
     yubioath-flutter
