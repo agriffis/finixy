@@ -203,7 +203,7 @@
   };
 
   programs.firefox.enable = true;
-  programs.ladybird.enable = true;
+  #programs.ladybird.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
