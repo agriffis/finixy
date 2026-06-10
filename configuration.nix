@@ -61,15 +61,15 @@
   # Desktop environments / compositors
 
   # GNOME
-  services.displayManager.gdm.enable = false; # last working was 2026-05-15
+  services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
   # Gemini claims this isn't really X, it's just old configuration paths.
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true; # switched to work around gdm
-    displayManager.lightdm.greeters.slick.enable = true;
-  };
+# services.xserver = {
+#   enable = true;
+#   displayManager.lightdm.enable = true; # switched to work around gdm
+#   displayManager.lightdm.greeters.slick.enable = true;
+# };
 
   # Hyprland — also pulls in xdg-desktop-portal-hyprland automatically
   programs.hyprland = {
