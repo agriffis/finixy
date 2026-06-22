@@ -57,6 +57,17 @@
 
   programs.mtr.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for your binaries here
+    # glibc is included by default, but common ones include:
+    zlib
+    zstd
+    stdenv.cc.cc
+    curl
+    openssl
+  ];
+
   ###########################################################################
   # Desktop environments / compositors
 
