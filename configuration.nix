@@ -169,7 +169,15 @@
   };
 
   # Libvirt / KVM (replaces `dnf5 install libvirt virt-install`)
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      # Following esp for Win11
+      swtpm.enable = true;
+    };
+  };
 
   ###########################################################################
   # Syncthing
