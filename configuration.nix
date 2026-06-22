@@ -229,6 +229,7 @@
     ghostty
 
     # ── GNOME extras ───────────────────────────────────────────────────────
+    gjs
     gnome-pomodoro
     gnome-tweaks
     refine
