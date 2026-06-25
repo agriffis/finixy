@@ -277,6 +277,7 @@
     wayland-utils              # wayland-info etc.
     wev                        # Wayland event viewer
     wl-clipboard               # wl-copy / wl-paste
+    waypipe                    # network proxy for Wayland applications
     wlr-randr                  # xrandr equivalent for wlroots
     xwayland-satellite         # rootless Xwayland for niri/sway
 
