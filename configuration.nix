@@ -312,7 +312,9 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "kvm"
       "libvirtd"   # KVM / virt-manager access
+      "render"
       "docker"
     ];
   };
