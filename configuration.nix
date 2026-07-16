@@ -77,6 +77,12 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # GNOME indexing keeps killing system
+  systemd.user.services."tracker-miner-fs-3".enable = false;
+  systemd.user.services."tracker-extract-3".enable = false;
+  systemd.user.services."localsearch-3".enable = false;
+  systemd.user.services."tinysparql-3".enable = false;
+
   # Gemini claims this isn't really X, it's just old configuration paths.
 # services.xserver = {
 #   enable = true;
