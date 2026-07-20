@@ -86,6 +86,9 @@
   systemd.user.services."localsearch-3".enable = false;
   systemd.user.services."tinysparql-3".enable = false;
 
+  # Or maybe it's this, instead
+  systemd.user.services."gvfs-fuse-daemon".enable = false;
+
   # Gemini claims this isn't really X, it's just old configuration paths.
 # services.xserver = {
 #   enable = true;
