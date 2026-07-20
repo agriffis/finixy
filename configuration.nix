@@ -106,6 +106,9 @@
   # Also pulls in xdg-desktop-portal-wlr automatically
   programs.sway.enable = true;
 
+  # SwayFX — Sway fork with eye-candy (rounded corners, shadows, blur, etc.)
+  programs.sway.package = pkgs.swayfx;
+
   programs.mango.enable = true;
 
   # Miracle-WM — Mir-based tiling compositor
