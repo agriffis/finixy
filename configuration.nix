@@ -343,4 +343,30 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+
+  # NFS client
+  services.nfs.idmapd.settings.General.Domain = "scampersand";
+
+  # NFS automounts via Tailscale
+  fileSystems."/misc/aron" = {
+    device = "junco.tail71bb0.ts.net:/home/aron";
+    fsType = "nfs4";
+    options = [
+      "soft"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=600" # Unmount after 10 min of inactivity
+      "noauto"                     # Don't mount at boot, wait for access
+    ];
+  };
+
+  fileSystems."/misc/space" = {
+    device = "nuthatch.tail71bb0.ts.net:/mnt/puddle/space";
+    fsType = "nfs4";
+    options = [
+      "soft"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=600" # Unmount after 10 min of inactivity
+      "noauto"                     # Don't mount at boot, wait for access
+    ];
+  };
 }
