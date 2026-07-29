@@ -77,8 +77,6 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  # KDE Plasma 6
-  services.desktopManager.plasma6.enable = true;
 
   # GNOME indexing keeps killing system
   systemd.user.services."tracker-miner-fs-3".enable = false;
