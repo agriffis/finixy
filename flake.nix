@@ -12,10 +12,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-mozilla = {
-      url = "github:mozilla/nixpkgs-mozilla";
-      flake = false;
-    };
+    firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {

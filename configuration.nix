@@ -245,7 +245,9 @@
   # libdisplay-info < 0.4.0, but nixpkgs bumped libdisplay-info to 0.4.0.
   # Use the 0.2.x package until niri is updated upstream.
   nixpkgs.overlays = [
-    (import inputs.nixpkgs-mozilla)
+    (final: prev: {
+      firefox-nightly = inputs.firefox-nightly.packages.${prev.system}.firefox-nightly;
+    })
     (final: prev: {
       niri = prev.niri.override {
         libdisplay-info = prev.libdisplay-info_0_2;
@@ -260,7 +262,7 @@
   environment.systemPackages = with pkgs; [
 
     # ── Browsers ───────────────────────────────────────────────────────────
-    latest.firefox-nightly-bin  # Firefox Nightly (stable managed via programs.firefox)
+    firefox-nightly  # Firefox Nightly (stable managed via programs.firefox)
 
     # ── Terminals ──────────────────────────────────────────────────────────
     kitty
