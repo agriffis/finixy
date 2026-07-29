@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -245,6 +245,7 @@
   # libdisplay-info < 0.4.0, but nixpkgs bumped libdisplay-info to 0.4.0.
   # Use the 0.2.x package until niri is updated upstream.
   nixpkgs.overlays = [
+    (import inputs.nixpkgs-mozilla)
     (final: prev: {
       niri = prev.niri.override {
         libdisplay-info = prev.libdisplay-info_0_2;
@@ -257,6 +258,9 @@
   ###########################################################################
 
   environment.systemPackages = with pkgs; [
+
+    # ── Browsers ───────────────────────────────────────────────────────────
+    latest.firefox-nightly-bin  # Firefox Nightly (stable managed via programs.firefox)
 
     # ── Terminals ──────────────────────────────────────────────────────────
     kitty
