@@ -241,16 +241,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Workaround: niri 26.04 vendors libdisplay-info-sys 0.3.0 which requires
-  # libdisplay-info < 0.4.0, but nixpkgs bumped libdisplay-info to 0.4.0.
-  # Use the 0.2.x package until niri is updated upstream.
   nixpkgs.overlays = [
     inputs.firefox-nightly.overlays.default
-    (final: prev: {
-      niri = prev.niri.override {
-        libdisplay-info = prev.libdisplay-info_0_2;
-      };
-    })
   ];
 
   ###########################################################################
