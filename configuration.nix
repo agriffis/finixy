@@ -66,6 +66,7 @@
     gnumake
     openssl
     pkg-config
+    python3
     stdenv.cc.cc
     zlib
     zstd
