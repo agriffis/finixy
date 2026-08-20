@@ -21,7 +21,7 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        { nixpkgs.overlays = [ (_final: _prev: { mise = mise.packages.x86_64-linux.mise; }) ]; }
+        { nixpkgs.overlays = [ mise.overlay ]; }
         ./configuration.nix
         nixos-hardware.nixosModules.framework-13-7040-amd
         inputs.mangowm.nixosModules.mango
