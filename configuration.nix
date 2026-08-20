@@ -305,9 +305,6 @@
     wlr-randr                  # xrandr equivalent for wlroots
     xwayland-satellite         # rootless Xwayland for niri/sway
 
-    # Miracle-WM (no NixOS module yet)
-    miracle-wm
-
     # ── NOT available in nixpkgs (Fyra Labs / Terra only) ─────────────────
     # noctalia-shell  — Fyra Labs shell layer for niri; no nixpkgs package.
     #                   Options: build from source, or use a custom overlay.
