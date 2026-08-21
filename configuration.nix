@@ -275,7 +275,8 @@
     tree-sitter       # parser library + CLI
 
     # ── ncurses utilities ──────────────────────────────────────────────────
-    ncurses           # includes 'toe' (table of terminfo entries)
+    ncurses
+    ncurses.dev # includes 'toe' (table of terminfo entries)
 
     # ── Virtualisation tools ───────────────────────────────────────────────
     virt-manager
