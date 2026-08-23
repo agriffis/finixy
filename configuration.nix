@@ -267,6 +267,7 @@
     refine
 
     # ── CLI / shell tools (build/10-build.sh) ──────────────────────────────
+    gcc               # provides cc, gcc, g++
     atuin
     eternal-terminal  # 'et' remote shell
     git
