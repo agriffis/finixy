@@ -267,6 +267,7 @@
     refine
 
     # ── CLI / shell tools (build/10-build.sh) ──────────────────────────────
+    bc                # arbitrary-precision calculator
     gcc               # provides cc, gcc, g++
     atuin
     eternal-terminal  # 'et' remote shell
@@ -274,6 +275,7 @@
     mise              # runtime version manager (asdf replacement)
     stow              # symlink farm manager
     tree-sitter       # parser library + CLI
+    zip               # create/modify zip archives
 
     # ── ncurses utilities ──────────────────────────────────────────────────
     ncurses
