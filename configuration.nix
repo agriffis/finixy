@@ -223,6 +223,9 @@
   # Note: the keybase-redirector bug worked around in the Fedora script is
   # not applicable here; NixOS ships a clean keybase package.
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "keybase-gui-6.5.1"
+  ];
 
   ###########################################################################
   # Programs
