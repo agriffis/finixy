@@ -114,6 +114,11 @@
 
   programs.mango.enable = true;
 
+  # Umbriel — noctalia's wlroots-based compositor, runs as a systemd user
+  # session (like GNOME) via systemd.packages / sessionPackages provided
+  # by its NixOS module.
+  programs.umbriel.enable = true;
+
   # Miracle-WM — Mir-based tiling compositor
   # No NixOS module yet; added as a package below.
 

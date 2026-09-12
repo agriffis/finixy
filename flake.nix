@@ -12,6 +12,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    umbriel = {
+      url = "github:noctalia-dev/umbriel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
     mise.url = "github:jdx/mise";
   };
@@ -30,6 +34,7 @@
         ./configuration.nix
         nixos-hardware.nixosModules.framework-13-7040-amd
         inputs.mangowm.nixosModules.mango
+        inputs.umbriel.nixosModules.default
         ./noctalia.nix
       ];
     };
