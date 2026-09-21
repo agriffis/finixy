@@ -158,9 +158,19 @@
     ensurePrinters = [
       {
         name = "lj1200";
-        deviceUri = "ipp://junco.tail71bb0.ts.net:631/printers/lj1200";
-        # "magic" line for driverless printing.
-        model = "everywhere";
+        description = "HP LaserJet 1200";
+        location = "Aron's closet";
+        deviceUri = "socket://jetdirect.scampernet:9100";
+        model = "HP/hp-hpljhp_color_laserjet_cp5225-ps.ppd";
+        ppdOptions = {
+          "job-sheets" = "none none";
+          "media" = "na_letter_8.5x11in";
+          "sides" = "one-sided";
+          "ColorModel" = "Gray";
+          "Duplex" = "None";
+          "cupsd-conf-default-job-priority" = "50";
+          "cupsd-conf-default-print-quality" = "5";
+        };
       }
     ];
   };
