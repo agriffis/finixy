@@ -321,6 +321,7 @@
 
     # ── Wayland / compositor helpers (build/40-desktops.sh) ───────────────
     brightnessctl              # backlight control
+    ddcutil                    # DDC/CI monitor control CLI (query/set brightness etc. over i2c)
     luminance                  # DDC/CI brightness control for external displays
     kanshi                     # dynamic display config (autorandr for Wayland)
     playerctl                  # MPRIS media player control
