@@ -12,6 +12,9 @@
 
   hardware.graphics.enable = true;
 
+  # DDC/CI access for luminance (external monitor brightness control)
+  hardware.i2c.enable = true;
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -360,6 +363,7 @@
       "libvirtd"   # KVM / virt-manager access
       "render"
       "docker"
+      "i2c"
     ];
   };
 
