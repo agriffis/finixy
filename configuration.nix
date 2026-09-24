@@ -161,10 +161,10 @@
         description = "HP LaserJet 1200";
         location = "Aron's closet";
         deviceUri = "socket://jetdirect.scampernet:9100";
-        model = "HP/hp-hpljhp_color_laserjet_cp5225-ps.ppd";
+        model = "HP/hp-laserjet_1200-pcl3.ppd";
         ppdOptions = {
           "job-sheets" = "none none";
-          "media" = "na_letter_8.5x11in";
+          "media" = "Letter";
           "sides" = "one-sided";
           "ColorModel" = "Gray";
           "Duplex" = "None";
