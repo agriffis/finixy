@@ -1,6 +1,6 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, inputs, ... }:
 
@@ -12,12 +12,11 @@
 
   hardware.graphics.enable = true;
 
-  # DDC/CI access for luminance (external monitor brightness control)
+  # DDC/CI access external monitor brightness control
   hardware.i2c.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -84,43 +83,18 @@
 
 
   # GNOME indexing keeps killing system
-  systemd.user.services."tracker-miner-fs-3".enable = false;
-  systemd.user.services."tracker-extract-3".enable = false;
-  systemd.user.services."localsearch-3".enable = false;
-  systemd.user.services."tinysparql-3".enable = false;
+# systemd.user.services."tracker-miner-fs-3".enable = false;
+# systemd.user.services."tracker-extract-3".enable = false;
+# systemd.user.services."localsearch-3".enable = false;
+# systemd.user.services."tinysparql-3".enable = false;
 
   # Or maybe it's this, instead
-  systemd.user.services."gvfs-fuse-daemon".enable = false;
-
-  # Gemini claims this isn't really X, it's just old configuration paths.
-# services.xserver = {
-#   enable = true;
-#   displayManager.lightdm.enable = true; # switched to work around gdm
-#   displayManager.lightdm.greeters.slick.enable = true;
-# };
-
-  # Hyprland — also pulls in xdg-desktop-portal-hyprland automatically
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;  # use uwsm session wrapper (replaces manual uwsm setup)
-  };
-
-  # Niri — scrollable-tiling Wayland compositor
-  programs.niri.enable = true;
-
-  # Sway — i3-compatible tiling Wayland compositor
-  # Also pulls in xdg-desktop-portal-wlr automatically
-  programs.sway.enable = true;
-
-  # SwayFX — Sway fork with eye-candy (rounded corners, shadows, blur, etc.)
-  programs.sway.package = pkgs.swayfx;
-
-  programs.mango.enable = true;
+# systemd.user.services."gvfs-fuse-daemon".enable = false;
 
   # Umbriel — noctalia's wlroots-based compositor, runs as a systemd user
   # session (like GNOME) via systemd.packages / sessionPackages provided
   # by its NixOS module.
-  programs.umbriel.enable = true;
+# programs.umbriel.enable = true;
 
   # Miracle-WM — Mir-based tiling compositor
   # No NixOS module yet; added as a package below.
@@ -129,18 +103,14 @@
   # XDG Desktop Portals
   ###########################################################################
 
-  xdg.portal = {
-    enable = true;
-    # xdg-desktop-portal-gnome  — auto-added by services.xserver.desktopManager.gnome
-    # xdg-desktop-portal-hyprland — auto-added by programs.hyprland
-    # xdg-desktop-portal-wlr    — auto-added by programs.sway
-    # Add gtk portal as fallback for niri and other compositors
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-  };
-
-  ###########################################################################
-  # Audio
-  ###########################################################################
+# xdg.portal = {
+#   enable = true;
+#   # xdg-desktop-portal-gnome  — auto-added by services.xserver.desktopManager.gnome
+#   # xdg-desktop-portal-hyprland — auto-added by programs.hyprland
+#   # xdg-desktop-portal-wlr    — auto-added by programs.sway
+#   # Add gtk portal as fallback for niri and other compositors
+#   extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+# };
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -150,6 +120,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  services.libinput.enable = true;
 
   ###########################################################################
   # Printing
@@ -308,22 +280,22 @@
 
     # ── Hyprland ecosystem (build/10-build.sh) ─────────────────────────────
     # hyprland itself is managed by programs.hyprland.enable above
-    hyprpolkitagent            # polkit agent for Hyprland
-    hyprpicker                 # colour picker
-    hypridle                   # idle daemon
-    hyprlock                   # screen locker
-    hyprsunset                 # blue-light filter
-    hyprsysteminfo             # system info overlay
-    hyprshot                   # screenshot tool
-    uwsm                       # universal Wayland session manager
+#   hyprpolkitagent            # polkit agent for Hyprland
+#   hyprpicker                 # colour picker
+#   hypridle                   # idle daemon
+#   hyprlock                   # screen locker
+#   hyprsunset                 # blue-light filter
+#   hyprsysteminfo             # system info overlay
+#   hyprshot                   # screenshot tool
+#   uwsm                       # universal Wayland session manager
     # hyprland-contrib and hyprland-plugins are not in nixpkgs as a bundle;
     # use the upstream hyprland flake overlay if you need them.
 
     # ── Wayland / compositor helpers (build/40-desktops.sh) ───────────────
-    brightnessctl              # backlight control
+#   brightnessctl              # backlight control
     ddcutil                    # DDC/CI monitor control CLI (query/set brightness etc. over i2c)
-    luminance                  # DDC/CI brightness control for external displays
-    kanshi                     # dynamic display config (autorandr for Wayland)
+#   luminance                  # DDC/CI brightness control for external displays
+#   kanshi                     # dynamic display config (autorandr for Wayland)
     playerctl                  # MPRIS media player control
     wayland-utils              # wayland-info etc.
     wev                        # Wayland event viewer
@@ -354,9 +326,14 @@
   # Users
   ###########################################################################
 
+  users.groups.aron = {
+    gid = 10208;
+  };
   users.users.aron = {
     isNormalUser = true;
     description = "Aron Griffis";
+    uid = 10208;
+    group = "aron";
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -367,14 +344,6 @@
       "i2c"
     ];
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
 
   # NFS client
   services.nfs.idmapd.settings.General.Domain = "scampersand";
@@ -401,4 +370,23 @@
       "noauto"                     # Don't mount at boot, wait for access
     ];
   };
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+  # to actually do that.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  system.stateVersion = "26.05"; # Did you read the comment?
 }

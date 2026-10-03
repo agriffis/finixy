@@ -14,23 +14,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/luks-0e197793-9597-4931-852f-76661e4dab70";
+    { device = "/dev/mapper/my_encrypted_btrfs";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
+      options = [ "subvol=nixos" ];
     };
 
-  boot.initrd.luks.devices."luks-0e197793-9597-4931-852f-76661e4dab70".device = "/dev/disk/by-uuid/0e197793-9597-4931-852f-76661e4dab70";
+  boot.initrd.luks.devices."my_encrypted_btrfs".device = "/dev/disk/by-uuid/4b31b0d7-49d4-4281-ba02-eff30d4d12c7";
 
   fileSystems."/home" =
-    { device = "/dev/mapper/luks-0e197793-9597-4931-852f-76661e4dab70";
+    { device = "/dev/mapper/my_encrypted_btrfs";
       fsType = "btrfs";
-      options = [ "subvol=@home" ];
+      options = [ "subvol=home" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/CCEE-9695";
+    { device = "/dev/disk/by-uuid/D686-A97F";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices = [ ];
