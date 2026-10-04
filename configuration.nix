@@ -42,6 +42,16 @@
 
   services.flatpak.enable = true;
 
+  # services.flatpak has no declarative option for adding remotes, so we
+  # add Flathub ourselves (gnome-software needs this remote to show any apps)
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
   # Enable the Smart Card daemon (required for YubiKey)
   services.pcscd.enable = true;
 
