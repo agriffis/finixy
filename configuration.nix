@@ -273,7 +273,6 @@
     bc                # arbitrary-precision calculator
     gcc               # provides cc, gcc, g++
     atuin
-    eternal-terminal  # 'et' remote shell
     git
     mise              # runtime version manager (asdf replacement)
     stow              # symlink farm manager
