@@ -274,7 +274,8 @@
     gcc               # provides cc, gcc, g++
     atuin
     git
-    mise              # runtime version manager (asdf replacement)
+    # Commented in favor of installing in .local/bin via mise snippet
+    #mise              # runtime version manager (asdf replacement)
     stow              # symlink farm manager
     tree-sitter       # parser library + CLI
     zip               # create/modify zip archives
