@@ -17,6 +17,7 @@
 #     inputs.nixpkgs.follows = "nixpkgs";
 #   };
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
+    helium-browser.url = "github:oxcl/nix-flake-helium-browser";
     mise.url = "github:jdx/mise";
   };
 

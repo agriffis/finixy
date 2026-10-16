@@ -248,6 +248,19 @@
 
   nixpkgs.overlays = [
     inputs.firefox-nightly.overlays.default
+    inputs.helium-browser.overlays.default
+    # Bundle the official Widevine CDM into Helium (same approach nixpkgs
+    # uses for `chromium.override { enableWideVine = true; }`), since the
+    # upstream Helium build has Widevine support compiled in but ships
+    # without the proprietary library.
+    (final: prev: {
+      helium = prev.helium.overrideAttrs (old: {
+        postInstall = (old.postInstall or "") + ''
+          mkdir -p $out/opt/helium/WidevineCdm
+          cp -r ${final.widevine-cdm}/share/google/chrome/WidevineCdm/* $out/opt/helium/WidevineCdm/
+        '';
+      });
+    })
   ];
 
   ###########################################################################
@@ -258,6 +271,7 @@
 
     # ── Browsers ───────────────────────────────────────────────────────────
     firefox-nightly-bin  # Firefox Nightly (stable managed via programs.firefox)
+    helium               # Helium browser
 
     # ── Terminals ──────────────────────────────────────────────────────────
     kitty
