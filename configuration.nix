@@ -20,6 +20,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  zramSwap.enable = true;
+
   networking.hostName = "wren";
   networking.networkmanager.enable = true;
 
