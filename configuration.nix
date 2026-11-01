@@ -264,7 +264,14 @@
       });
     })
     (final: prev: {
-      ghostty = inputs.ghostty.packages.${prev.system}.default;
+      # Fix blurry text on fractionally-scaled Wayland outputs: the Y
+      # pixel-snapping offset was not being negated when the GL texture is
+      # flipped, so snapping shifted the surface the wrong way instead of
+      # correcting it. See:
+      # https://github.com/ghostty-org/ghostty/discussions/13911#discussioncomment-18728986
+      ghostty = inputs.ghostty.packages.${prev.system}.default.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ./patches/ghostty-fractional-scale-flip.patch ];
+      });
     })
   ];
 
