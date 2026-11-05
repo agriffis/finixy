@@ -4,6 +4,30 @@
 
 { config, lib, pkgs, inputs, ... }:
 
+let
+  # rclone remote name -> fileSystems entry for a Google Drive mount under
+  # ~/Drive. See the "Google Drive (rclone)" section below for details.
+  mkDriveMount = remote: {
+    device = "${remote}:";
+    fsType = "rclone";
+    options = [
+      "rw"
+      "noauto"
+      "nofail"
+      "_netdev"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=600" # Unmount after 10 min of inactivity
+      "args2env"
+      "allow-other"
+      "uid=10208"
+      "gid=10208"
+      "umask=002"
+      "vfs-cache-mode=writes"
+      "config=/home/aron/.config/rclone/rclone.conf"
+      "cache-dir=/home/aron/.cache/rclone/${remote}"
+    ];
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -300,6 +324,7 @@
     gcc               # provides cc, gcc, g++
     atuin
     git
+    rclone            # Google Drive (and other cloud) mounts, see fileSystems below
     # Commented in favor of installing in .local/bin via mise snippet
     #mise              # runtime version manager (asdf replacement)
     stow              # symlink farm manager
@@ -406,6 +431,25 @@
       "noauto"                     # Don't mount at boot, wait for access
     ];
   };
+
+  ###########################################################################
+  # Google Drive (rclone)
+  ###########################################################################
+
+  # rclone ships a `mount.rclone` helper (picked up from PATH, same as any
+  # other mount.<fstype> helper) so a plain fileSystems entry + systemd
+  # automount works exactly like the NFS mounts above: the fuse filesystem
+  # only mounts (and starts talking to Google) on first access under
+  # ~/Drive, and unmounts again after being idle — no login-time service
+  # needed.
+  #
+  # Each remote must already exist in ~/.config/rclone/rclone.conf, e.g.:
+  #   rclone config create "agriffis@gmail.com" drive
+  #   rclone config create "aron@scampersand.com" drive
+  programs.fuse.userAllowOther = true;
+
+  fileSystems."/home/aron/Drive/agriffis@gmail.com" = mkDriveMount "agriffis@gmail.com";
+  fileSystems."/home/aron/Drive/aron@scampersand.com" = mkDriveMount "aron@scampersand.com";
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
