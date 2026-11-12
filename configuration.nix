@@ -95,6 +95,8 @@ in
     recursive
   ];
 
+  programs.fish.enable = true;
+
   programs.mtr.enable = true;
 
   programs.nix-ld.enable = true;
