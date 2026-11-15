@@ -295,7 +295,7 @@ in
       # flipped, so snapping shifted the surface the wrong way instead of
       # correcting it. See:
       # https://github.com/ghostty-org/ghostty/discussions/13911#discussioncomment-18728986
-      ghostty = inputs.ghostty.packages.${prev.system}.default.overrideAttrs (old: {
+      ghostty = inputs.ghostty.packages.${prev.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
         patches = (old.patches or [ ]) ++ [ ./patches/ghostty-fractional-scale-flip.patch ];
       });
     })
