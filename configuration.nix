@@ -315,7 +315,6 @@ in
     # ── Terminals ──────────────────────────────────────────────────────────
     kitty
     ghostty
-    inputs.rex-rune.packages.${pkgs.stdenv.hostPlatform.system}.default  # Rex client (needs a rex server)
 
     # ── GNOME extras ───────────────────────────────────────────────────────
     gjs
