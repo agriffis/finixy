@@ -42,6 +42,7 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   zramSwap.enable = true;
@@ -398,6 +399,7 @@ in
     description = "Aron Griffis";
     uid = 10208;
     group = "aron";
+    shell = pkgs.fish;
     extraGroups = [
       "networkmanager"
       "wheel"
