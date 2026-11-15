@@ -19,6 +19,8 @@
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
     helium-browser.url = "github:oxcl/nix-flake-helium-browser";
     ghostty.url = "github:ghostty-org/ghostty";
+    # Keep its own nixpkgs pin: needs newer Rust/Zig than nixos-unstable may have.
+    rex-rune.url = "github:shuv1337/rex-rune";
     mise.url = "github:jdx/mise";
   };
 
